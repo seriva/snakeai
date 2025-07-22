@@ -1,18 +1,31 @@
 """
-Standard DQN (Deep Q-Network) Snake AI Agent.
+Enhanced DQN (Deep Q-Network) Snake AI Agent - Version 2.
 
-Implementation of the classic Deep Q-Learning algorithm as introduced by 
-Mnih et al. (2015) in "Human-level control through deep reinforcement learning."
+Improved implementation of Deep Q-Learning with multiple enhancements over V1
+for better performance and training stability.
+
+Key Improvements over V1:
+- **Enhanced Neural Network**: Larger architecture (256 hidden units, 2 layers) 
+  with dropout regularization vs V1's simple 64-unit single layer
+- **Optimized Hyperparameters**: Better learning rate (0.003), higher discount 
+  factor (0.99), slower epsilon decay, and more frequent learning updates
+- **Learning Rate Scheduling**: Adaptive learning rate that decreases over time
+  for improved convergence stability  
+- **Reward Shaping**: Distance-based rewards for moving toward food, survival
+  bonuses, and length-based bonuses to accelerate learning
+- **Enhanced Training**: Dual step methods (basic + enhanced with reward shaping)
+  and improved performance tracking with learning rate monitoring
 
 Features:
-- Standard Deep Q-Network (DQN) algorithm
-- Simple multi-layer perceptron (MLP) neural network
-- Basic uniform experience replay buffer  
+- Enhanced Deep Q-Network with larger MLP architecture and regularization
+- Reward-shaped experience replay with survival and distance bonuses
+- Adaptive learning rate scheduling for training stability
 - 16-feature state representation with immediate danger detection
-- Epsilon-greedy exploration strategy
-- Soft target network updates
+- Epsilon-greedy exploration with optimized decay schedule
+- Soft target network updates with improved update frequency
 
-This serves as a baseline implementation for comparison with more advanced methods.
+This version significantly outperforms V1 through architectural improvements,
+better hyperparameter tuning, and reward engineering techniques.
 """
 
 import json
