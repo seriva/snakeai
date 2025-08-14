@@ -382,8 +382,8 @@ class DQNAgentV2:
             return False
         
         # Load model state
-        self.q_local.load_state_dict(torch.load(model_path))
-        self.q_target.load_state_dict(torch.load(model_path))  # Sync target network
+        self.q_local.load_state_dict(torch.load(model_path, map_location=self.device))
+        self.q_target.load_state_dict(torch.load(model_path, map_location=self.device))  # Sync target network
         
         # Load training data if available
         if os.path.exists(data_path):
@@ -395,6 +395,42 @@ class DQNAgentV2:
         
         print(f"✅ Model loaded! Best score: {self.best_score}, Epsilon: {self.epsilon:.3f}")
         return True
+
+    def export_to_onnx(self, onnx_path: str = "model/dqn_agent_v2.onnx") -> bool:
+        """Export the trained model to ONNX format for JavaScript inference."""
+        try:
+            # Create model directory
+            os.makedirs(os.path.dirname(onnx_path), exist_ok=True)
+            
+            # Set model to evaluation mode
+            self.q_local.eval()
+            
+            # Create dummy input with your state size (16 features)
+            # Use zeros instead of random to ensure deterministic export
+            dummy_input = torch.zeros(1, self.state_size, device=self.device, dtype=torch.float32)
+            
+            # Export to ONNX with more conservative settings
+            torch.onnx.export(
+                self.q_local,
+                dummy_input,
+                onnx_path,
+                export_params=True,
+                opset_version=11,
+                do_constant_folding=False,  # Disable constant folding to avoid precision issues
+                input_names=['state'],
+                output_names=['q_values'],
+                dynamic_axes={
+                    'state': {0: 'batch_size'},
+                    'q_values': {0: 'batch_size'}
+                },
+                verbose=False  # Reduce output verbosity
+            )
+            print(f"✅ DQN V2 model exported to {onnx_path}")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Failed to export DQN V2 model to ONNX: {e}")
+            return False
 
 
 def train_dqn_agent(episodes: int = 10_000) -> None:
