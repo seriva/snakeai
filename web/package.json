@@ -1,0 +1,16 @@
+{
+  "name": "snakeai",
+  "version": "1.0.0",
+  "scripts": {
+    "prepare": "microtastic prep",
+    "dev": "microtastic dev",
+    "dependencies": "microtastic prep",
+    "prod": "microtastic prod"
+  },
+  "author": "Luuk van Venrooij",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "microtastic": "^0.0.45"
+  }
+}
