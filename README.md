@@ -2,11 +2,11 @@
 
 A Snake game AI project featuring two implementations of Deep Q-Network (DQN) algorithms. The project compares the original DQN (V1) with an enhanced version (V2) that includes improved hyperparameters, reward shaping, and architectural enhancements. Built with PyTorch.
 
-References:
+**References:**
 - [Original Implementation for the DQN V1 approach](https://github.com/SumitJainUTD/pytorch-ann-snake-game-ai)
 - DQN Paper: "Human-level control through deep reinforcement learning" (Mnih et al., 2015)
 
-Current V2 model performs 72.5% better then the V1 model as compared in a 1000 games played.
+**Performance**: Current V2 model performs 72.5% better than the V1 model as compared in 1000 games played.
 
 ## Features
 
@@ -15,6 +15,15 @@ Current V2 model performs 72.5% better then the V1 model as compared in a 1000 g
 - **Side-by-Side Demo**: Watch both agents play simultaneously for direct comparison
 - **Training**: Train both AI agents with different approaches
 - **Model Saving**: Save and load trained models
+
+## Tech Stack
+
+- **Language**: Python
+- **ML Framework**: PyTorch
+- **Package Manager**: uv
+- **Dependencies**: PyTorch, NumPy, Pygame
+- **Architecture**: Deep Q-Network (DQN) algorithms
+- **Training**: Reinforcement learning with neural networks
 
 ## Project Structure
 
@@ -35,7 +44,9 @@ snake-ai/
 └── pyproject.toml          # Dependencies
 ```
 
-## Installation
+## Quick Start
+
+### Installation
 
 ```bash
 # Clone the repository
@@ -45,8 +56,6 @@ cd snakeai
 # Install dependencies
 uv sync
 ```
-
-## Quick Start
 
 ### 1. Play the Game Yourself
 ```bash
